@@ -1,0 +1,49 @@
+<div id="card" class="card" style="width: 350px;">
+    <% if (suspended === true) { %>
+        <div class="suspended">
+            <div class="suspended-red" style="background-color: red; border-radius: 10px; padding: 5px; margin:5px;">
+                <h3 class="text-center text-light">Suspended</h3>
+            </div>
+            <p class="text-center text-dark">This question is suspended for violating Ignotum Rules. Waiting for admin action.</p>
+        </div>
+    <% } %>
+    <div id="questions-box">
+        <h1><%= question %></h1>
+    </div>
+    <form action="/api/questions/respond/<%= id %>" method="post">
+        <div class="input-group">
+            <span class="input-group-text">Your answer...</span>
+            <textarea class="form-control" for="answer" name="answer" aria-label="Your answer..." required></textarea>
+        </div>
+        <% if (logged == true) { %>
+         <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="name" name="name" for="name">
+            <label class="form-check-label" for="name" name="name">Show my name</label>
+        </div>
+        <% } %>
+        <input type="submit" class="btn btn-primary" value="Send">
+    </form>
+</div>
+
+<style>
+    #card #questions-box {
+        size: 1px;
+        color: #18191A;
+        text-align: center;
+        border: 5px solid #ccc;
+        border-radius: 5px;
+        background-color: gray;
+        width: auto;
+    }
+    #card {
+        margin: auto;
+        width: 500px;
+        padding: 50px;
+        border: 5px solid #ccc;
+        border-radius: 5px;
+        background-color: #f2f2f2;
+    }
+    body {
+        background-color: #18191A
+    }
+</style>

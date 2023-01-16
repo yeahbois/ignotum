@@ -1,0 +1,47 @@
+<% if (alert.length >= 1) { %>
+	<div class="alert alert-success alert-dismissible" role="alert" style="margin: auto; width: 550px; padding: 10px; border-radius: 10px; text-align: center;">
+	<div><%= alert %></div>
+	  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	</div>
+  <% } %>
+
+<h1 class="text-center text-light">Admin Page</h1>
+<div class="list-group">
+	<a href="/admin/report/list" class="list-group-item list-group-item-action active" aria-current="true">
+		<h5 class="mb-1 text-center">Report (<%= amount.reportIDs.length %>)</h5>
+		<p class="mb-1">View the unread report.</p>
+	</a>
+
+	<a href="/admin/data/user/view" class="list-group-item list-group-item-action active" aria-current="true">
+		<h5 class="mb-1 text-center">Users (<%= amount.userIDs.length %>)</h5>
+		<p class="mb-1">View and change the user data.</p>
+	</a>
+
+	<a href="/admin/data/question/view" class="list-group-item list-group-item-action active" aria-current="true">
+		<h5 class="mb-1 text-center">Questions (<%= amount.questionIDs.length %>)</h5>
+		<p class="mb-1">View and change the question data.</p>
+	</a>
+
+	<a href="/admin/data/poll/view" class="list-group-item list-group-item-action active" aria-current="true">
+		<h5 class="mb-1 text-center">Polls (<%= amount.pollIDs.length %>)</h5>
+		<p class="mb-1">View and change the poll data.</p>
+	</a>
+</div>
+
+<style>
+    body {
+		background-color: #18191A;
+	}
+
+	.list-group {
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+        width: 500px;
+        padding: 50px;
+    }
+
+    .list-group a:hover {
+        background-color: blue
+    }
+</style>

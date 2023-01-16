@@ -1,0 +1,31 @@
+<h1 class="text-center text-light">All Unread Report</h1>
+<div class="list-group">
+    <% data.forEach(data => { %>
+        <a href="/admin/report/<%= data.id %>" class="list-group-item list-group-item-action active" aria-current="true">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1"><%= data.reason %></h5>
+              <small><%= data.type %></small>
+            </div>
+            <p class="mb-1"><%= data.longReason %></p>
+            <small><%= data.id %></small>
+        </a>
+    <% }) %>
+</div>
+
+<style>
+    body {
+        background-color: #18191A;
+    }
+
+    .list-group {
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+        width: 500px;
+        padding: 50px;
+    }
+
+    .list-group a:hover {
+        background-color: blue
+    }
+</style>

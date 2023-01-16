@@ -1,0 +1,168 @@
+<h1 class="text-center text-light"><%= type %> Data</h1>
+
+<% if (type === 'User') { %>
+    <div class="container">
+        <h4>ID:</h4>
+        <p><%= data.id %></p>
+    
+        <h4>Username:</h4>
+        <p><%= data.un %></p>
+    
+        <h4>Nickname:</h4>
+        <p><%= data.nn %></p>
+    
+        <h4>Questions:</h4>
+        <p><%= data.q %></p>
+
+        <h4>Polls:</h4>
+        <p><%= data.p %></p>
+    
+        <h4>Administrator:</h4>
+        <p><%= bonusData.isAdmin %></p>
+    
+        <h4>Suspended:</h4>
+        <p><%= bonusData.suspended %></p>
+
+        <% if (bonusData.banned === false) { %>
+            <h4>Banned:</h4>
+            <p><%= bonusData.banned %></p>
+        <% } else { %>
+            <h4>Banned:</h4>
+            <p>Reason: <%= bonusData.banned.reason %><br>
+               Long Reason: <%= bonusData.banned.longReason %><br>
+               Unbanned: <%= moment().to(bonusData.banned.until) %><br>
+               Reporter: <%= bonusData.banned.ra.split('/')[0] %><br>
+               Administrator: <%= bonusData.banned.ra.split('/')[1] %></p>
+        <% } %> 
+
+        <% if (bonusData.banned === false) { %>
+            <button id="btn-user-ban" class="btn btn-primary">Ban</button>
+        <% } else { %>
+            <a id="btn-user-unban" class="btn btn-primary" href="/privateAPi/admin/action/unbanUser?user=<%= data.id %>">Unban</a>
+        <% } %> 
+        <% if (bonusData.suspended === true) { %>
+            <a id="btn-user-dsuspend" class="btn btn-primary" href="/privateAPI/admin/action/deleteSuspend?type=user&user=<%= data.id %>">Remove Suspend</a>
+        <% } %>
+        <div class="banform invisible">
+            <form action="/privateAPI/admin/action/ban?admin=<%= admin %>&user=<%= data.id %>" method="post">
+            <h5 class="text-center">Ban Form</h5>
+            <label for="reason" class="form-label">Reason</label>
+            <input type="text" name="reason" id="reason" required>
+            <label for="longReason" class="form-label">Long Reason</label>
+            <input type="text" name="longReason" id="longReason" required>
+            <label for="until" class="form-label">Ban Until</label>
+            <input type="datetime-local" name="until" id="until" required>
+            <label for="reporter" class="form-label">Reporter</label>
+            <input type="text" name="reporter" id="reporter" required>
+            <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector('#btn-user-ban').addEventListener('click', () => {
+            document.querySelector('.banform').classList.remove('invisible');
+            document.querySelector('#btn-user-ban').classList.add('invisible');
+            if (document.querySelector('#btn-user-dsuspend')) {
+                document.querySelector('#btn-user-dsuspend').classList.add('invisible');
+            }
+        });
+    </script>
+<% } else if (type === 'Question') { %>
+    <div class="container">
+        <h4>ID:</h4>
+        <p><%= data.id %></p>
+
+        <h4>Creator:</h4>
+        <p><a href="/admin/data/user/<%= data.u.id %>"><%= data.u.un %></a></p>
+
+        <h4>Title:</h4>
+        <p><%= data.tit %></p>
+
+        <h4>Created at:</h4>
+        <p><%= moment(data.t) %></p>
+
+        <h4>Private</h4>
+        <p><%= data.pr %></p>
+
+        <h4>Response Amount:</h4>
+        <p><%= data.resp.length + data.respCom.length %></p>
+
+        <h4>Suspended:</h4>
+        <p><%= bonusData.sus %></p>
+
+        <a id="btn-question-delete" class="btn btn-primary" href="/privateAPI/admin/action/delete?type=question&question=<%= data.id %>">Delete</a>
+        <% if (bonusData.sus === true) { %>
+            <a id="btn-question-dsuspend" class="btn btn-primary" href="/privateAPI/admin/action/deleteSuspend?type=question&question=<%= data.id %>">Remove Suspend</a>
+        <% } %>
+    </div>
+
+<% } else if (type === 'Response') { %>
+    <div class="container">
+        <h4>ID:</h4>
+        <p><%= data.id %></p>
+
+        <h4>User:</h4>
+        <p><a href="/admin/data/user/<%= data.u.id %>"><%= data.u.un %></a></p>
+
+        <h4>Response:</h4>
+        <p><%= data.r %></p>
+
+        <h4>Created at:</h4>
+        <p><%= moment(data.t) %></p>
+
+        <h4>Suspended:</h4>
+        <p><%= bonusData.sus %></p>
+
+        <a id="btn-response-delete" class="btn btn-primary" href="/privateAPI/admin/action/delete?type=response&question=<%= questionData.id %>&response=<%= data.id %>">Delete</a>
+        <% if (bonusData.sus === true) { %>
+            <a id="btn-response-dsuspend" class="btn btn-primary" href="/privateAPI/admin/action/deleteSuspend?type=response&question=<%= questionData.id %>&response=<%= data.id %>">Remove Suspend</a>
+        <% } %>
+    </div>
+<% } else if (type === 'Poll') { %>
+    <div class="container">
+        <h4>ID:</h4>
+        <p><%= data.id %></p>
+
+        <h4>Creator:</h4>
+        <p><a href="/admin/data/user/<%= data.u.id %>"><%= data.u.id %></a></p>
+
+        <h4>Responses:</h4>
+        <p><%= data.resp.length %> responses</p>
+
+        <h4>Created at:</h4>
+        <p><%= moment(data.t) %></p>
+
+        <h4>Suspended:</h4>
+        <p><%= bonusData.sus %></p>
+
+        <a id="btn-response-delete" class="btn btn-primary" href="/privateAPI/admin/action/delete?type=poll&poll=<%= data.id %>">Delete</a>
+        <% if (bonusData.sus === true) { %>
+            <a id="btn-response-dsuspend" class="btn btn-primary" href="/privateAPI/admin/action/deleteSuspend?type=poll&poll=<%= data.id %>">Remove Suspend</a>
+        <% } %>
+    </div>
+<% } %>   
+
+<style>
+    body {
+        background-color: #18191A;
+    }
+
+    .container {
+        margin: auto;
+        margin-top: auto;
+        width: 500px;
+        padding: 50px;
+        border: 5px solid #ccc;
+        border-radius: 5px;
+        background-color: #f2f2f2;
+    }
+
+    .banform {
+        width: 80%;
+        padding: 50px;
+        border: 5px solid #ccc;
+        border-radius: 5px;
+        background-color: #f2f2f2;
+    }
+</style>

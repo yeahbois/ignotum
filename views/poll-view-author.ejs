@@ -1,0 +1,157 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+<% if (suspended === true) { %>
+    <div class="suspended">
+        <div class="suspended-red" style="background-color: red; border-radius: 10px; padding: 5px; margin:5px;">
+            <h3 class="text-center text-light">Suspended</h3>
+        </div>
+        <p class="text-center text-light">This Poll is suspended for violating Ignotum Rules. Waiting for admin action.</p>
+    </div>
+<% } %>
+
+<h1 class="text-center text-light">Poll Statistic</h1>
+
+<div id="question-box">
+    <h1 id="question" class="text-center text-dark"><%= data.tit %></h1>
+</div>
+
+<h1 class="text-center text-light" style="margin-top: 10px;">Chart</h1>
+
+<div class="statistic">
+    <canvas id="myChartTes" class="canvas"></canvas>
+    <canvas id="myChart2" class="canvas"></canvas>
+    <canvas id="myChart3" class="canvas"></canvas>
+</div>
+
+<div class="buttons text-center">
+    <h1 class="text-center text-light">Responders</h1>
+    <% data.ch.forEach(e => { %>
+     <a class="btn btn-primary" href="/polls/<%= data.id %>/responders/<%= e %>"><%= e %></a>
+    <% }) %>
+</div>
+
+<% if (responder) { %>
+    <div class="responders list-group text-center" style="margin-left: 30%;margin-right: 30%;">
+        <% responder.forEach(e => { %>
+         <a href="/user/<%= e %>" class="list-group-item list-group-item-action"><%= e %></a>
+        <% }) %>
+    </div>
+<% } %>
+
+<script>
+    let xVal = "<%= xValues %>";
+    var xValues = xVal.split(',');
+    let yVal = "<%= yValues %>";
+    var yValues = yVal.split(',');
+    var barColors = ["red", "green","blue","orange","brown"];
+
+    new Chart("myChartTes", {
+        type: "bar",
+        data: {
+            labels: xValues,
+            datasets: [{
+                backgroundColor: barColors,
+                data: yValues
+            }]
+        },
+        options: {
+            legend: {display: false},
+            title: {
+                display: true,
+                text: "Poll Data (Bar)"
+            },
+            responsive: true
+        }
+    });
+
+    new Chart("myChart2", {
+        type: "pie",
+        data: {
+            labels: xValues,
+            datasets: [{
+                backgroundColor: barColors,
+                data: yValues
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: "Poll Data (Pie Chart)"
+            },
+            responsive: true
+        }
+    });
+
+    new Chart("myChart3", {
+        type: "doughnut",
+        data: {
+            labels: xValues,
+            datasets: [{
+                backgroundColor: barColors,
+                data: yValues
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: "Poll Data (Doughnut Chart)"
+            },
+            responsive: true
+        }
+    });
+</script>
+
+<style>
+    body {
+        background-color: #18191A
+    }
+
+    #question-box {
+        size: 20px;
+        color: gray;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: white;
+        width: auto;
+        height: auto;
+        margin-left: 20%;
+        margin-right: 20%;
+    }
+
+    #question {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        align-items: center;
+    }
+
+    .statistic {
+        display: flex;
+        width: 300px;
+        height: 200px;
+        margin-top: 50px;
+    }
+
+    .buttons {
+        margin-top: 150px;
+    }
+
+    @media only screen and (max-width: 800px) {
+        .statistic {
+            display: block;
+            position: relative;
+            width: 200px;
+            height: 100px;
+            align-items: center;
+            margin-left: 35%;
+        }
+
+        .statistic .canvas {
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        .buttons {
+            margin-top: 500px;
+        }
+    }
+</style>

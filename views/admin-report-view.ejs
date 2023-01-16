@@ -1,0 +1,110 @@
+<h1 class="text-center text-light">Report Data</h1>
+
+<% if (data.type === "question") { %>
+ <div class="container">
+    <h4>ID:</h4>
+    <p><%= data.id %></p>
+
+    <h4>Question:</h4>
+    <p><a href="/admin/data/question/<%= data.question.id %>"><%= data.question.id %></a></p>
+
+    <h4>Reason:</h4>
+    <p><%= data.reason %></p>
+
+    <h4>Long Reason:</h4>
+    <p><%= data.longReason %></p>
+
+    <h4>Reporter:</h4>
+    <p><a href="/admin/data/user/<%= data.reporter.id %>"><%= data.reporter.username %></a></p>
+
+    <h4>Actions:</h4>
+    <p>You can delete question, or ban user in their page. Click on the blue text above.</p>
+
+    <a class="btn btn-primary" href="/privateAPI/admin/closeReport?id=<%= data.id %>">Close Report</a>
+ </div>
+<% } else if (data.type === 'questionResponse') { %>
+    <div class="container">
+        <h4>ID:</h4>
+        <p><%= data.id %></p>
+    
+        <h4>Question:</h4>
+        <p><a href="/admin/data/question/<%= data.question.id %>"><%= data.question.id %></a></p>
+
+        <h4>Response:</h4>
+        <p><a href="/admin/data/response/<%= data.question.id %>.<%= data.response.id %>"><%= data.question.id %>/<%= data.response.id %></a></p>
+    
+        <h4>Reason:</h4>
+        <p><%= data.reason %></p>
+    
+        <h4>Long Reason:</h4>
+        <p><%= data.longReason %></p>
+    
+        <h4>Reporter:</h4>
+        <p><a href="/admin/data/user/<%= data.reporter.id %>"><%= data.reporter.username %></a></p>
+    
+        <h4>Actions:</h4>
+        <p>You can delete question, delete response, or ban user in their page. Click on the blue text above.</p>
+    
+        <a class="btn btn-primary" href="/privateAPI/admin/closeReport?id=<%= data.id %>">Close Report</a>
+     </div>
+<% } else if (data.type === 'user') { %>
+    <div class="container">
+        <h4>ID:</h4>
+        <p><%= data.id %></p>
+    
+        <h4>User:</h4>
+        <p><a href="/admin/data/user/<%= data.user.id %>"><%= data.user.username %></a></p>
+    
+        <h4>Reason:</h4>
+        <p><%= data.reason %></p>
+    
+        <h4>Long Reason:</h4>
+        <p><%= data.longReason %></p>
+    
+        <h4>Reporter:</h4>
+        <p><a href="/admin/data/user/<%= data.reporter.id %>"><%= data.reporter.username %></a></p>
+    
+        <h4>Actions:</h4>
+        <p>You can ban the user or ban the reporter. Click on the blue text above.</p>
+    
+        <a class="btn btn-primary" href="/privateAPI/admin/closeReport?id=<%= data.id %>">Close Report</a>
+     </div>
+<% } else if (data.type === 'poll') { %>
+    <div class="container">
+        <h4>ID:</h4>
+        <p><%= data.id %></p>
+    
+        <h4>Poll:</h4>
+        <p><a href="/admin/data/poll/<%= data.poll.id %>"><%= data.poll.id %></a></p>
+    
+        <h4>Reason:</h4>
+        <p><%= data.reason %></p>
+    
+        <h4>Long Reason:</h4>
+        <p><%= data.longReason %></p>
+    
+        <h4>Reporter:</h4>
+        <p><a href="/admin/data/user/<%= data.reporter.id %>"><%= data.reporter.username %></a></p>
+    
+        <h4>Actions:</h4>
+        <p>You can ban the user or ban the reporter. Click on the blue text above.</p>
+    
+        <a class="btn btn-primary" href="/privateAPI/admin/closeReport?id=<%= data.id %>">Close Report</a>
+     </div>
+<% } %>   
+
+<style>
+    body {
+        background-color: #18191A;
+    }
+
+    .container {
+        margin: auto;
+        margin-top: auto;
+        width: 500px;
+        padding: 50px;
+        border: 5px solid #ccc;
+        border-radius: 5px;
+        background-color: #f2f2f2;
+    }
+</style>

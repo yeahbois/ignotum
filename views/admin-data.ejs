@@ -1,0 +1,59 @@
+<h1 class="text-center text-light">All <%= type %> Data</h1>
+<% if (type === 'User') { %>
+    <div class="list-group">
+        <% data.forEach(data => { %>
+            <a href="/admin/data/user/<%= data.id %>" class="list-group-item list-group-item-action active" aria-current="true">
+                <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1"><%= data.nn %></h5>
+                  <small><%= data.q.length %></small>
+                </div>
+                <p class="mb-1"><%= data.un %></p>
+                <small><%= data.id %></small>
+            </a>
+        <% }) %>
+    </div>
+<% } else if (type === 'Question') { %>
+    <div class="list-group">
+        <% data.forEach(data => { %>
+            <a href="/admin/data/question/<%= data.id %>" class="list-group-item list-group-item-action active" aria-current="true">
+                <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1"><%= data.u.un %></h5>
+                  <small><%= data.resp.length + data.respCom.length %> response</small>
+                </div>
+                <p class="mb-1"><%= data.tit %></p>
+                <small><%= data.id %></small>
+            </a>
+        <% }) %>
+    </div>
+<% } else if (type === 'Poll') { %>
+    <div class="list-group">
+        <% data.forEach(data => { %>
+            <a href="/admin/data/poll/<%= data.id %>" class="list-group-item list-group-item-action active" aria-current="true">
+                <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1"><%= data.u.un %></h5>
+                  <small><%= data.resp.length %> response</small>
+                </div>
+                <p class="mb-1"><%= data.tit %></p>
+                <small><%= data.id %></small>
+            </a>
+        <% }) %>
+    </div>
+<% } %> 
+
+<style>
+    body {
+        background-color: #18191A;
+    }
+
+    .list-group {
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+        width: 500px;
+        padding: 50px;
+    }
+
+    .list-group a:hover {
+        background-color: blue
+    }
+</style>

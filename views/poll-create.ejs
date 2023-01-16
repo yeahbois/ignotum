@@ -1,0 +1,45 @@
+<div class="create">
+    <h1>Create Poll</h1>
+    <form action="/privateAPI/polls/create" method="post">
+        <div class="input-group">
+            <span class="input-group-text">Your question..</span>
+            <textarea class="form-control" for="question" name="question" aria-label="Your question" required></textarea>
+        </div>
+        <div class="input-group">
+            <span class="input-group-text">Options (Split using comma ',')</span>
+            <textarea class="form-control" for="options" name="options" aria-label="Options" required></textarea>
+        </div>
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="choose" name="choose" for="choose">
+            <label class="form-check-label" for="choose" name="choose">Can Only Select One</label>
+        </div>
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="private" name="private" for="private">
+            <label class="form-check-label" for="private" name="private">Private</label>
+            <label class="form-check-label">If the private is on, it will make the poll not showed at the public (API)</label>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Create">
+    </form>
+</div>
+
+<style>
+    body {
+        background-color: #18191A
+    }
+
+    .create {
+        margin: auto;
+        width: 500px;
+        padding: 50px;
+        border: 5px solid #ccc;
+        border-radius: 5px;
+        background-color: #f2f2f2;
+    }
+
+    .create h1 {
+        font-size: 35px;
+        color: #18191A;
+        text-align: center;
+        margin-top: 1px;
+    }
+</style>

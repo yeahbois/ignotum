@@ -1,0 +1,249 @@
+<% if (alert.length >= 1) { %>
+	<div class="alert alert-success alert-dismissible" role="alert" style="margin: auto; width: 550px; padding: 10px; border-radius: 10px; text-align: center;">
+	<div><%= alert %></div>
+	  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	</div>
+<% } %>
+
+<h1 class="text-center text-light">Report</h1>
+<div class="select-type st1 list-group">
+	<button onclick="selectType('question')" class="list-group-item list-group-item-action active" aria-current="true">
+		<h5 class="mb-1 text-center">Question</h5>
+		<p class="mb-1">Report a question!</p>
+	</button>
+
+	<button onclick="selectType('questionResponse')" class="list-group-item list-group-item-action active" aria-current="true">
+		<h5 class="mb-1 text-center">Question Response</h5>
+		<p class="mb-1">Report a question response!</p>
+	</button>
+
+	<button onclick="selectType('user')" class="list-group-item list-group-item-action active" aria-current="true">
+		<h5 class="mb-1 text-center">User</h5>
+		<p class="mb-1">Report a user!</p>
+	</button>
+
+	<button onclick="selectType('poll')" class="list-group-item list-group-item-action active" aria-current="true">
+		<h5 class="mb-1 text-center">Poll</h5>
+		<p class="mb-1">Report a poll!</p>
+	</button>
+</div>
+
+<div class="get-data-question gdq list-group">
+	<form id="form-question" action="/privateAPI/report/question?accID=<%= account.id %>" method="post">
+		<h4>Question<br>Fill this form</h4>
+		<div class="mb-3">
+			<label for="questionID" class="form-label">Question ID</label>
+			<input type="text" class="form-control" id="questionID" name="questionID" required>
+		</div>
+		<div class="mb-3">
+			<label for="reason" class="form-label">Reason</label><br>
+			<select name="reasons" id="reasons" required>
+				<% ['inappropriate', 'racist', 'offensive', '18+', 'blasphemy', 'swearing', 'other'].forEach(e => { %>
+					<option value="<%= e %>"><%=  e.charAt(0).toUpperCase() + e.slice(1) %></option>
+				<% }) %>
+			</select><br><br>
+			<label for="longReason" class="form-label">Long Reason</label>
+			<input type="text" class="form-control" id="longReason" name="longReason">
+		</div>
+		<button type="submit" class="btn btn-primary">Submit</button>
+	</form>
+</div>
+
+<div class="get-data-questionResponse gdqr list-group">
+	<form id="form-question" action="/privateAPI/report/questionResponse?accID=<%= account.id %>" method="post">
+		<h4>Question Response<br>Fill this form</h4>
+		<div class="mb-3">
+			<label for="questionID" class="form-label">Question ID</label>
+			<input type="text" class="form-control" id="questionID" name="questionID" required>
+		</div>
+		<div class="mb-3">
+			<label for="responseID" class="form-label">Response ID</label>
+			<input type="text" class="form-control" id="responseID" name="responseID" required>
+		</div>
+		<div class="mb-3">
+			<label for="reason" class="form-label">Reason</label><br>
+			<select name="reasons" id="reasons" required>
+				<% ['inappropriate', 'racist', 'offensive', '18+', 'blasphemy', 'swearing', 'doxing', 'other'].forEach(e => { %>
+					<option value="<%= e %>"><%=  e.charAt(0).toUpperCase() + e.slice(1) %></option>
+				<% }) %>
+			</select><br><br>
+			<label for="longReason" class="form-label">Long Reason</label>
+			<input type="text" class="form-control" id="longReason" name="longReason">
+		</div>
+		<button type="submit" class="btn btn-primary">Submit</button>
+	</form>
+</div>
+
+<div class="get-data-user gdu list-group">
+	<form id="form-question" action="/privateAPI/report/user?accID=<%= account.id %>" method="post">
+		<h4>User<br>Fill this form</h4>
+		<div class="mb-3">
+			<label for="username" class="form-label">Username</label>
+			<input type="text" class="form-control" id="username" name="username" required>
+		</div>
+		<div class="mb-3">
+			<label for="reason" class="form-label">Reason</label><br>
+			<select name="reasons" id="reasons" required>
+				<% ['inappropriate', 'racist', 'offensive', '18+', 'blasphemy', 'swearing', 'spamming', 'other'].forEach(e => { %>
+					<option value="<%= e %>"><%=  e.charAt(0).toUpperCase() + e.slice(1) %></option>
+				<% }) %>
+			</select><br><br>
+			<label for="longReason" class="form-label">Long Reason</label>
+			<input type="text" class="form-control" id="longReason" name="longReason">
+		</div>
+		<button type="submit" class="btn btn-primary">Submit</button>
+	</form>
+</div>
+
+<div class="get-data-poll gdp list-group">
+	<form id="form-question" action="/privateAPI/report/poll?accID=<%= account.id %>" method="post">
+		<h4>Poll<br>Fill this form</h4>
+		<div class="mb-3">
+			<label for="poll" class="form-label">Poll ID</label>
+			<input type="text" class="form-control" id="poll" name="poll" required>
+		</div>
+		<div class="mb-3">
+			<label for="reason" class="form-label">Reason</label><br>
+			<select name="reasons" id="reasons" required>
+				<% ['inappropriate', 'racist', 'offensive', '18+', 'blasphemy', 'swearing', 'other'].forEach(e => { %>
+					<option value="<%= e %>"><%=  e.charAt(0).toUpperCase() + e.slice(1) %></option>
+				<% }) %>
+			</select><br><br>
+			<label for="longReason" class="form-label">Long Reason</label>
+			<input type="text" class="form-control" id="longReason" name="longReason">
+		</div>
+		<button type="submit" class="btn btn-primary">Submit</button>
+	</form>
+</div>
+
+<script>
+	let data = {
+		type: null
+	};
+	function selectType(type) {
+		data.type = type;
+		document.querySelector(".select-type").classList.remove('select-type');
+		document.querySelector(".st1").classList.add('select-type-hide');
+
+		if (type === "question") {
+			document.querySelector(".get-data-question").classList.remove('get-data-question');
+			document.querySelector(".gdq").classList.add('get-data-question-show');
+		} else if (type === "questionResponse") {
+			document.querySelector(".get-data-questionResponse").classList.remove('get-data-questionResponse');
+			document.querySelector(".gdqr").classList.add('get-data-questionResponse-show');
+		} else if (type === "user") {
+			document.querySelector(".get-data-user").classList.remove('get-data-user');
+			document.querySelector(".gdu").classList.add('get-data-user-show');
+		} else if (type === "poll") {
+			document.querySelector(".get-data-poll").classList.remove('get-data-poll');
+			document.querySelector(".gdp").classList.add('get-data-poll-show');
+		} else {
+			return;
+		}
+	}
+</script>
+
+
+<style>
+    body {
+		background-color: #18191A;
+	}
+
+	.list-group {
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+        width: 500px;
+        padding: 50px;
+    }
+
+    .list-group button:hover {
+        background-color: blue
+    }
+
+	.select-type {
+		display: block;
+		visibility: visible;
+	}
+
+	.select-type-hide {
+		display: none;
+		visibility: hidden;
+	}
+
+	.gdq {
+		margin: auto;
+		width: 60%;
+		padding: 50px;
+		border: 5px solid #ccc;
+		border-radius: 5px;
+		background-color: #f2f2f2;
+	}
+
+	.get-data-question {
+		display: none;
+		visibility: hidden;
+	}
+
+	.get-data-question-show {
+		display: block;
+		visibility: visible;
+	}
+
+	.gdqr {
+		margin: auto;
+		width: 60%;
+		padding: 50px;
+		border: 5px solid #ccc;
+		border-radius: 5px;
+		background-color: #f2f2f2;
+	}
+
+	.get-data-questionResponse {
+		display: none;
+		visibility: hidden;
+	}
+
+	.get-data-questionResponse-show {
+		display: block;
+		visibility: visible;
+	}
+
+	.gdu {
+		margin: auto;
+		width: 60%;
+		padding: 50px;
+		border: 5px solid #ccc;
+		border-radius: 5px;
+		background-color: #f2f2f2;
+	}
+
+	.get-data-user {
+		display: none;
+		visibility: hidden;
+	}
+
+	.get-data-user-show {
+		display: block;
+		visibility: visible;
+	}
+
+	.gdp {
+		margin: auto;
+		width: 60%;
+		padding: 50px;
+		border: 5px solid #ccc;
+		border-radius: 5px;
+		background-color: #f2f2f2;
+	}
+
+	.get-data-poll {
+		display: none;
+		visibility: hidden;
+	}
+
+	.get-data-poll-show {
+		display: block;
+		visibility: visible;
+	}
+</style>

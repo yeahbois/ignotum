@@ -1,0 +1,58 @@
+<div class="text-center">
+<div class="btn-group">
+    <a href="#" class="btn btn-primary" id="active">Inbox</a>
+    <a href="/questions/<%= questionID %>/completed" class="btn btn-primary">Completed</a>  
+</div>
+</div>
+
+<% if (suspended === true) { %>
+    <div class="suspended">
+        <div class="suspended-red">
+            <h3 class="text-center text-light">Suspended</h3>
+        </div>
+        <p class="text-center text-light">This question is suspended for violating Ignotum Rules. Waiting for admin action.</p>
+    </div>
+<% } %>
+
+<div class="list-group">
+<% questions.forEach(question => { %>
+    <a href="/questions/<%= questionID %>/<%= question.id %>" class="list-group-item list-group-item-action active" aria-current="true">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1"><%= question.u.nn %></h5>
+          <small><%= moment(question.t).fromNow() %></small>
+        </div>
+        <p class="mb-1"><%= question.r %></p>
+        <small><%= question.id %></small>
+    </a>
+<% }) %>
+</div>
+<style>
+    .btn-group {
+        margin-top: 20px;
+    }
+    .btn-group #active {
+        background-color: blue;
+    }
+    .list-group {
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+        width: 500px;
+        padding: 50px;
+    }
+    .list-group a:hover {
+        background-color: blue
+    }
+    body {
+        background-color: #18191A
+    }
+    .suspended-red {
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+        width: 35%;
+        padding: 5px;
+        background-color: red;
+        border-radius: 10px;
+    }
+</style>

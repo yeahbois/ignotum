@@ -1,0 +1,50 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+<% if (alert.length >= 1) { %>
+    <div class="alert alert-success alert-dismissible" role="alert" style="margin: auto; width: 550px; padding: 10px; border-radius: 10px; text-align: center;">
+    <div><%= alert %></div>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<% } %>
+
+<div class="text-center">
+<div class="btn-group">
+    <a href="/questions/<%= questionID %>" class="btn btn-primary">Inbox</a>
+    <a href="/questions/<%= questionID %>/completed" class="btn btn-primary" id="active">Completed</a>  
+</div>
+</div>
+
+<div class="list-group">
+<% questions.forEach(question => { %>
+    <a href="/questions/<%= questionID %>/completed/<%= question.id %>" class="list-group-item list-group-item-action active" aria-current="true">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1"><%= question.u.nn %></h5>
+          <small><%= moment(question.t).fromNow() %></small>
+        </div>
+        <p class="mb-1"><%= question.r %></p>
+        <small><%= question.id %></small>
+    </a>
+<% }) %>
+</div>
+<style>
+    .btn-group {
+        margin-top: 20px;
+    }
+    .btn-group #active {
+        background-color: blue;
+    }
+    .list-group {
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+        width: 500px;
+        padding: 50px;
+    }
+    .list-group a:hover {
+        background-color: blue
+    }
+    body {
+        background-color: #18191A
+    }
+</style>

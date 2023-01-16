@@ -1,0 +1,237 @@
+<div class="profile-box">
+    <div class="header-profile-box">
+        <img id="profile-pic" src="https://cdn.discordapp.com/attachments/997479291216465992/1061605255911055370/ignotum-icon.png" alt="Avatar">
+        <div class="name">
+            <% if (userData.isAdmin === true) { %>
+                <h1><%= userData.nickname %> (<a href="/admin">Administrator</a>)</h1>
+            <% } else { %>
+                <h1><%= userData.nickname %></h1>
+            <% } %>
+            <h2>@<%= userData.username %></h2>
+            <% if (otherUser === false) { %>
+                <a href="/logout" class="btn btn-primary">Logout</a>
+            <% } %>
+        </div>
+        <% if (bonusData.userSuspend === true) { %>
+            <div class="suspended">
+                <div class="suspended-red" style="background-color: red; border-radius: 10px; padding: 5px; margin:5px;">
+                    <h3 class="text-center text-light">Suspended</h3>
+                </div>
+                <p class="text-center text-light">This user is suspended for violating Ignotum Rules. Waiting for admin action.</p>
+            </div>
+        <% } %>
+        <% if (bonusData.userBan === false) { %>
+            <div></div>
+        <% } else { %>
+            <div class="banned">
+                <div class="banned-red" style="background-color: red; border-radius: 10px; padding: 5px; margin:5px;">
+                    <h3 class="text-center text-light">Banned</h3>
+                </div>
+                <p class="text-center text-light">This user has been banned for "<%= bonusData.userBan.reason %>". This user will be unbanned <%= moment().to(bonusData.userBan.until); %>.</p>
+                <% if (otherUser === false) { %>
+                 <button class="btn btn-primary lmb" style="text-align: center;" onclick="banLearnMore()">More...</button>
+                 <p id="More" class="text-center text-light"></p>
+                <button class="btn btn-primary cmb invisible" style="text-align: center;" onclick="banCloseMore()">Close</button>
+                <% } %>
+            </div>
+
+            <script>
+                function banLearnMore() {
+                    document.getElementById('More').innerText = `
+            Reason: <%= bonusData.userBan.reason %>
+            Long Reason: <%= bonusData.userBan.longReason %>
+            Reporter: <%= bonusData.userBan.ra.split('/')[0] %>
+            Administrator: <%= bonusData.userBan.ra.split('/')[1] %>
+            Unbanned: <%= moment().to(bonusData.userBan.until); %>
+                    `;
+                    document.querySelector('.lmb').classList.add('invisible');
+                    document.querySelector('.cmb').classList.remove('invisible');
+                }
+            
+                function banCloseMore() {
+                    document.getElementById('More').innerText = "";
+                    document.querySelector('.lmb').classList.remove('invisible');
+                    document.querySelector('.cmb').classList.add('invisible');
+                }
+            </script>
+        <% } %> 
+        <div class="bio">
+            <h3>Bio: </h3>
+            <p>
+                Bio system coming soon!
+            </p>
+        </div>
+        <div class="badges">
+            <% userData.badges.forEach(badge => { %>
+                <div class="badge">
+                    <img src="<%= badge.icon %>" alt="badgeicon">
+                    <h3><%= badge.name %></h3>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</div>
+<% if (userData.questions.length > 0) { %>
+ <h1 class="text-center text-light">Questions</h1>
+<% } %>
+<div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2" id="statistic">
+    <% userData.questions.forEach(question => { %>
+        <div class="col-3">
+            <div class="card card-block" style="width: 18rem;">
+                <div class="card-body">
+                <h5 class="card-title"><%= question.resp.length %> Responses</h5>
+                <p class="card-text"><%= question.tit %></p>
+                <a href="/questions/<%= question.id %>" class="btn btn-primary">Click me!</a>
+                </div>
+            </div>
+        </div>
+    <% }) %>
+</div>
+
+<% if (userData.polls.length > 0) { %>
+ <h1 class="text-center text-light">Polls</h1>
+<% } %>
+<div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2" id="statistic">
+    <% userData.polls.forEach(poll => { %>
+        <div class="col-3">
+            <div class="card card-block" style="width: 18rem;">
+                <div class="card-body">
+                <h5 class="card-title"><%= poll.resp.length %> Responses</h5>
+                <p class="card-text"><%= poll.tit %></p>
+                <a href="/polls/<%= poll.id %>" class="btn btn-primary">Click me!</a>
+                </div>
+            </div>
+        </div>
+    <% }) %>
+</div>
+
+<style>
+    body {
+        background-color: #18191A;
+    }
+    .profile-box {
+        background-color: #18191A;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 10px solid #18191A;
+        border-radius: 40px;
+    }
+    .header-profile-box {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .name {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .name h1 {
+        font-size: 45px;
+        color: white;
+        text-align: center;
+        text-shadow: black;
+    }
+    .name h2 {
+        font-size: 23px;
+        font-family: serif;
+        color: white;
+        text-align: center;
+    }
+    #profile-pic {
+        height: 150px;
+        width: 150px;
+        border-radius: 50%;
+        border: 5px solid white;
+        margin-top: 5px;
+    }
+    
+    .bio {
+        margin-top: 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 5px solid white;
+        border-radius: 40px;
+    }
+
+    .bio p {
+        font-size: 23px;
+        font-family: serif;
+        color: white;
+        text-align: center;
+        width: 400px;
+        height: 200px;
+    }
+
+    .bio h3 {
+        font-size: 23px;
+        font-family: serif;
+        color: white;
+        text-align: center;
+    }
+
+    .badges {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 400px;
+        height: 200px;
+        margin-top: 15px;
+    }
+
+    .badge {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 200px;
+        height: 200px;
+        margin-top: 15px;
+    }
+
+    .badge img:hover {
+        border: 5px solid black;
+        border-radius: 50px;
+    }
+
+    .badge img {
+        height: 100px;
+        width: 100px;
+        border-radius: 50%;
+        border: 5px solid white;
+        margin-top: 5px;
+    }
+
+    .badge h3 {
+        font-size: 23px;
+        font-family: serif;
+        color: white;
+        text-align: center;
+    }
+
+    .card-block {
+        height: 300px;
+        background-color: #fff;
+        border: none;
+        background-position: center;
+        background-size: cover;
+        transition: all 0.2s ease-in-out !important;
+        border-radius: 24px;
+        &:hover {
+            transform: translateY(-5px);
+            box-shadow: none;
+            opacity: 0.9;
+        }
+    }
+
+    .scrolling-wrapper {
+        overflow-x: auto;
+    }
+</style>

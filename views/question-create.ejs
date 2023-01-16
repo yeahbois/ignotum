@@ -1,0 +1,34 @@
+<div class="create">
+    <h1>Create Question</h1>
+    <form action="/api/questions/create" method="post">
+        <div class="input-group">
+            <span class="input-group-text">Your question..</span>
+            <textarea class="form-control" for="question" name="question" aria-label="Your question" required></textarea>
+        </div>
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="private" name="private" for="private">
+            <label class="form-check-label" for="private" name="private">Private</label>
+            <label class="form-check-label">If the private is on, it will make the question not showed at the public (API)</label>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Create">
+    </form>
+</div>
+<style>
+.create h1 {
+    font-size: 35px;
+    color: #18191A;
+    text-align: center;
+    margin-top: 1px;
+}
+.create {
+    margin: auto;
+    width: 500px;
+    padding: 50px;
+    border: 5px solid #ccc;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+}
+body {
+    background-color: #18191A
+}
+</style>

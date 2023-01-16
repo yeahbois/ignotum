@@ -1,0 +1,89 @@
+11/12/2022:
+    - Update Navbar
+    - Remove unused package
+    - News page
+
+12/12/2022:
+    - Fix userinfo bug (unknown user will result a crash)
+
+15/12/2022:
+    - New id system for responseID
+    - Fix question markasdone BUG (finally)
+
+16/12/2022:
+    - Create "create" page
+    - Update the Navbar
+    - Create "report" page
+
+17/12/2022:
+    - Create api/user public API
+    - Create api/question public API
+    - Private question now will not showed at the api/user or api/question
+
+18/12/2022:
+    - Report page now done
+    - Create admin page
+
+19/12/2022:
+    - Report system is now done
+
+20/12/2022:
+    - admin/report/list is done
+
+25/12/2022:
+    - admin/data is done
+    - todo: create a ui for user and question data, implement admin action feature like ban, delete
+
+26/12/2022:
+    - Fix userinfo not found bug
+    - Create a ui for user, question, and response data
+    - todo: implement admin action: ban, ui for report data
+
+27/12/2022:
+    - Implement ban system temp: userBan: {reason: 'noo',longReason: 'eeeeeeeeeeeeeeeeee',until: 1672150020000,ra: 'dik/lol'}
+
+28/12/2022:
+    - now Banned user cannot create question, and response question
+    - now admin can ban user at admin/data/user/:id
+    - todo: delete action, and else, checker for ban action
+
+29/12/2022:
+    - Create a check for admin/ban privateAPI
+    - finish all admin actions
+    - Create a ui for suspended question and response
+
+30/12/2022:
+    - Finish admin/report. Now ignotum is 90%
+    - Todo is poll system
+
+1/1/2023:
+    - Finish Poll System and UI
+    - todo: Update poll/statistic or poll/view-author page..
+
+2/1/2023:
+    - Finish poll/statistic page
+    - Update badge system
+
+5/1/2023:
+    - after getting reported, now user, question, and response are now marked as suspended.
+    - auto adding new data when the database is resetted.
+    - add LISENCE to ignotum
+
+6/1/2023:
+    - update about page
+    - report/poll, admin/report/poll, admin/data/poll is now done.
+    - update api for user and question
+
+8/1/2023:
+    - Create a validation for username, password, nickname, question, and response
+    - Update the ignotum icon
+
+11/1/2023:
+    - Fix poll bug
+    - Update privacy policy page
+    - Add God Favor to the credits
+    - Update created page
+
+12/1/2023:
+    - Add rate limit
+    - Initial Release
